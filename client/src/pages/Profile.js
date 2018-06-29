@@ -4,8 +4,25 @@ import API from '../utils/API';
 
 class Profile extends Component {
     state = {
-        business_name: ""
+        businessData: { 
+            business_name:"" 
+        }
     };
+
+    componentDidMount() {
+        this.getBusinessData();
+    }
+
+    getBusinessData = () => {
+        // api call
+        API.getBusinessData()
+            .then(res => {
+                this.setState( { businessData: res.data } );
+                console.log(res.data);
+                console.log(this.state);
+            })
+            .catch(err => console.log(err));
+    }
 
     render() {
         return (
@@ -16,18 +33,18 @@ class Profile extends Component {
                         <button>Login</button>
                         <button>Logout</button>
                     </div>
-                    <div class="container">
-                        <div class="jumbotron">
-                            <div class="jumbo-media">
+                    <div className="container">
+                        <div className="jumbotron">
+                            <div className="jumbo-media">
                                 <img src="img/UCL-reverse.jpg" />
                             </div>
-                            <h1>UNIVERSAL CHIMNEY LINING</h1>
+                            <h1>{this.state.businessData.business_name}</h1>
                         </div>
                     </div>
                 </header>
-
-
             </div>
         )
     }
 }
+
+export default withRouter(Profile);

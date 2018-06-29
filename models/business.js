@@ -12,6 +12,10 @@ const BusinessSchema = new Schema({
         //     len: [1]
         // }
     },
+    service_category: {
+        type: String,
+        allowedNull: false
+    },
     users: [
         {
           type: Schema.Types.ObjectId,

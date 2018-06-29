@@ -43,25 +43,43 @@ app.get("/", function(req, res) {
 //ROUTES THAT RESPOND WITH JSON OR DATA
 
 app.post('/register', function (req, res) {
-  User.register(new User({ username: req.body.username, password: req.body.password }), req.body.password, function (err, user) {
+  User.register(new User({ 
+    username: req.body.username, 
+    password: req.body.password 
+  }), req.body.password, function (err, user) {
       if (err) {
           console.log(err);
           return;
       }
 
-      Business.create({ business_name: req.body.business_name, users: [ user._id ] }, function (err, business) {
+      Business.create({ 
+        business_name: req.body.business_name,
+        service_category: req.body.service_category,
+        users: [ user._id ] 
+      }, function (err, business) {
         if (err) {
             console.log(err);
             return;
         }
+        //console.log(business);
+        passport.authenticate('local')(req, res, () => {
+          res.json(req.body.business_name);
+          console.log(req.body.business_name);
+        });
+
+      
       });
 
-      passport.authenticate('local')(req, res, function () {
-          res.json(true);
-      });
+      
   });
   
 });
+
+app.get("/getBusinessData/:bus", function (req, res) {
+  Business.findOne()
+  .then(foundBusiness => res.json(foundBusiness));
+
+})
 
 
 

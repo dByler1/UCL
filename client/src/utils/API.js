@@ -8,11 +8,17 @@ export default {
     loginUser: function (loginData) {
         return axios.post("/auth/login/", loginData);
     },
-    // Saves a book to the database
+    // Saves a business to the database
     registerUser: function (registerData) {
-        return axios.post("/auth/register", registerData);
+        return axios.post("/register", registerData);
     },
     logoutUser: function () {
         return axios.get("/auth/logout/");
     },
+    getBusinessData: function() {
+        return axios.get("/getBusinessData")
+    },
+    getSearchResults: function() {
+        return axios.get()
+    }
 };
