@@ -1,6 +1,8 @@
 import axios from "axios";
 
-export default {
+//do all router call here
+
+export  default {
     // Gets all books
     getUser: function () {
         return axios.get("/auth/check");
@@ -20,5 +22,11 @@ export default {
     },
     getSearchResults: function() {
         return axios.get()
+    },
+    fetchInitalData: function() {
+      return 'done'; 
+    },
+    fetchSearchResults: function() {
+        return null
     }
 };

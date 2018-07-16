@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import API from '../utils/api.js';
 
-class Register extends Component {
+class EditProfile extends Component {
 
     state = {
         business_name: '',
@@ -38,7 +38,7 @@ class Register extends Component {
     render() {
         return (
             <div className="container">
-                <h1>Register Page</h1>
+                <h1>Edit Profile</h1>
                 <p className="lead">Please enter your credentials below.</p>
                 <form action="/register" method="post" style={{ 'maxWidth': '300px' }}>
                     <div className="form-group">
@@ -59,4 +59,4 @@ class Register extends Component {
         );
     }
 }
-export default withRouter(Register);
+export default withRouter(EditProfile);

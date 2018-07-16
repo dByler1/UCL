@@ -1,0 +1,26 @@
+html {
+    background-color: grey;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 24em;
+}
+
+.searchBox input {
+    border: none;
+    font-size: 17px;
+}
+
+.loginNav {
+    display: flex;
+    justify-content: flex-end;
+    
+}
+
+.loginNav a {
+    padding: 5px;
+}

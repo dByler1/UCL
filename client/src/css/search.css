@@ -1,0 +1,56 @@
+/* 
+@media (max-width: 992px) {
+    .main {
+      max-width: 100%;
+    }
+  }
+   */
+
+body {
+    background-color: grey !important;
+}
+.main {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    align-items: flex-start;
+}
+
+.searchBox {
+    margin: 10px 20px 20px 20px;
+}
+
+.searchBox input {
+    border: none;
+    font-size: 17px;
+    padding: 10px 0px 10px 0px;
+    width: 100%;
+}
+
+.result {
+    background-color: white;
+    width: 100%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    margin: 0 20px 20px 20px;
+}
+.bizInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.result img {
+    max-width: 120px;
+    max-height: 120px;
+    border-radius: 10px;
+    margin: 5px;
+}
+
+.bizInfo h3 {
+    margin: 5px 5px 2.5px 5px;
+}
+
+.bizInfo span {
+    margin: 2.5px 5px 2.5px 5px;
+}

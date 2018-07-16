@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
-import API from '../utils/api.js';
+import API from '../utils/API';
 
 class Login extends Component {
 
@@ -29,6 +29,16 @@ class Login extends Component {
                 // this.history.pushState(null, 'login');
             })
             .catch(err => console.log(err));
+
+            /*
+            API.saveBook({
+                title: this.state.title,
+                author: this.state.author,
+                synopsis: this.state.synopsis
+            })
+                .then(res => this.loadBooks())
+                .catch(err => console.log(err));
+            */
         }
     };
 

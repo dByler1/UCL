@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
-import API from '../utils/API';
+import API from '../utils/api';
+import '../css/profile.css';
 
 class Profile extends Component {
     state = {
@@ -28,15 +29,11 @@ class Profile extends Component {
         return (
             <div className="container">
                 <header>
-                    <div>
-                        <button><a href="/register.html">Register</a></button>
-                        <button>Login</button>
-                        <button>Logout</button>
-                    </div>
+                
                     <div className="container">
                         <div className="jumbotron">
                             <div className="jumbo-media">
-                                <img src="img/UCL-reverse.jpg" />
+                                <img src="../img/UCL-reverse.jpg" />
                             </div>
                             <h1>{this.state.businessData.business_name}</h1>
                         </div>
