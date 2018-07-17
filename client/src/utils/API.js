@@ -20,8 +20,9 @@ export  default {
     getBusinessData: function() {
         return axios.get("/getBusinessData")
     },
-    getSearchResults: function() {
-        return axios.get()
+    getSearchResults: function (searchTerm) {
+        console.log(searchTerm)
+        return axios.get("/getSearchResults/" + searchTerm)
     },
     fetchInitalData: function() {
       return 'done'; 

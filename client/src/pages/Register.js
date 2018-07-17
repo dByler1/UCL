@@ -28,11 +28,12 @@ class Register extends Component {
                 password: this.state.password
             })
             .then(res => {
-                this.props.history.push("/")
+                this.props.history.push("/profile/?business=" + this.state.business_name)
             })
             .catch(err => console.log(err));
         }
         console.log(this.state.service_category);
+        
     };
 
     render() {

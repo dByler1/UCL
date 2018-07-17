@@ -6,7 +6,7 @@ import '../css/profile.css';
 class Profile extends Component {
     state = {
         businessData: { 
-            business_name:"" 
+            business_name:[]
         }
     };
 
@@ -33,7 +33,7 @@ class Profile extends Component {
                     <div className="container">
                         <div className="jumbotron">
                             <div className="jumbo-media">
-                                <img src="../img/UCL-reverse.jpg" />
+                                <img src="../img/UCL-reverse.jpg" alt="logo"/>
                             </div>
                             <h1>{this.state.businessData.business_name}</h1>
                         </div>

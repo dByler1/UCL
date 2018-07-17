@@ -2,27 +2,29 @@ import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import API from '../utils/api.js';
 import '../css/home.css';
-import util from '../utils/frontEnd.js';
 
 class Search extends Component {
-
+    state = {
+        searchTerm: ""
+    }
     
+    handleInputChange = event => {
+        const { name, value } = event.target;
+        this.setState({
+            [name]: value
+        });
+    };
 
     handleFormSubmit = event => {
         event.preventDefault();
-
-        
-     
-        // if (this.state.username && this.state.password) {
-        //     API.registerUser({
-        //         username: this.state.username,
-        //         password: this.state.password
-        //     })
-        //         .then(res => {
-        //             this.props.history.push("/results:id")
-        //         })
-        //         .catch(err => console.log(err));
-        // }
+        if (this.state.searchTerm.length > 1) {
+            API.getSearchResults(this.state.searchTerm)
+                .then(res => {
+                    this.props.history.push({ pathname: "/search/", state: { results: res.data } });
+                    console.log(res.data);
+                })
+                .catch(err => console.log(err));
+        }
     };
 
     render() {
@@ -35,7 +37,8 @@ class Search extends Component {
                         <h1>General Listings</h1>
                     </div>
                     <div className="searchBox">
-                        <input type="text" placeholder="Search.." onClick={this.handleFormSubmit} />
+                        <input type="text" placeholder="Search for a service" name="searchTerm" value={this.state.searchTerm} onChange={this.handleInputChange} />
+                        <button className="btn btn-default btn-primary" type='submit' onClick={this.handleFormSubmit}>Search</button>
                     </div>
                 </div>
                 )

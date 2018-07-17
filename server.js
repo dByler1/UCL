@@ -43,8 +43,9 @@ app.get("/", function(req, res) {
 //ROUTES THAT RESPOND WITH JSON OR DATA
 
 app.post('/register', function (req, res) {
+console.log(req.body.username);
   User.register(new User({ 
-    username: req.body.username, 
+    email: req.body.username,
     password: req.body.password 
   }), req.body.password, function (err, user) {
       if (err) {
@@ -64,7 +65,7 @@ app.post('/register', function (req, res) {
         //console.log(business);
         passport.authenticate('local')(req, res, () => {
           res.json(req.body.business_name);
-          console.log(req.body.business_name);
+          console.log("this is from the server route, after the passport authenticate" + req.body.business_name);
         });
 
       
@@ -75,8 +76,35 @@ app.post('/register', function (req, res) {
   
 });
 
-app.get("/getBusinessData/:bus", function (req, res) {
+app.post('/auth/login', passport.authenticate('local'), function (req, res) {
+  res.json(true);
+  console.log("user is authenticated");
+});
+
+app.get('/auth/check', function (req, res) {
+  if (req.user) {
+      res.json({ user: req.user });
+  }
+  else {
+      res.json(false);
+  }
+});
+
+app.get('/auth/logout', function (req, res) {
+  req.logout();
+  res.json(true);
+});
+
+app.get("/getBusinessData/", function (req, res) {
   Business.findOne()
+  .then(foundBusiness => res.json(foundBusiness));
+
+})
+
+
+app.get("/getSearchResults/:searchTerm", function (req, res) {
+  console.log("search term" + JSON.stringify(req.params));
+  Business.find({service_category: { $regex: '^' + req.params.searchTerm}})
   .then(foundBusiness => res.json(foundBusiness));
 
 })

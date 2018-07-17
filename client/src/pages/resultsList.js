@@ -31,14 +31,25 @@ class ResultsList extends Component {
             <div className="searchBox">
                 <input type="text" placeholder="Search.."/>
             </div>
-            <div className="result">
-                <img src="./img/ownerpic.jpeg"/>
-                <div className="bizInfo">
-                    <h3>Dave's Counseling Services</h3>
-                    <span>Bridgeport</span>
-                    <span>A school for those that need schoolin</span>
-                </div>
-            </div>
+           
+                {
+                    this.props.location.state && this.props.location.state.results ? 
+                        this.props.location.state.results.map(user => 
+                        <a href="/profile">
+                            <div className="result">
+                                <img src="./img/ownerpic.jpeg" alt="owner profile"/>
+                                <div className="bizInfo">
+                                    <h3>{user.business_name}</h3>
+                                    {/* <span></span> */}
+                                    <span>{user.service_category}</span>
+                                </div>
+                            </div>
+                        </a>
+                        
+                    ): <div> Go away! </div>
+                }
+                
+            
         </div>
         )
     }

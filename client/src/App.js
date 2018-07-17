@@ -7,6 +7,7 @@ import Profile from './pages/Profile';
 import Register from './pages/Register';
 import EditProfile from './pages/EditProfile';
 import Login from './pages/Login';
+import Logout from './pages/Logout.js';
 //import Home from './pages/Home';
 //import Login from './pages/Login';
 //import NoMatch from './pages/NoMatch';
@@ -21,59 +22,47 @@ import util from './utils/api.js';
 //tu<Link torial source: https://www.youtube.com/watch?v=nmbX2QL7ZJc
 //tu<Link torial source: https://tylermcginnis.com/react-router-pass-props-<Link to-components/
 
-const routes = [
-  {
-    //this is the base page for the user who is searching for a service
-    //this page will take the user input and render/redirect/switch <Link to the SearchList
-    //the MVP user input is the search term
-    //expansion is the zip code
-    path: '/',
-    component: Search
-  },
-  {
-    //this page provides the list results AND can take a new search term
-    //initial data necessary is the search results from the user search input
-    //the search functionality should be a seperate component since it will be used in two views
-    path: '/search',
-    component: ResultsList,
-    fetchInitialData: (searchResults) => util.fetchSearchResults(searchResults),
-  },
-  {
-    //this page displays the information of the business the user selected on the search page, or was directly navigated <Link to
-    //the url must contain the business name
-    //initial data - business data AND is logged in or not, plus related data if true
-    path: '/profile',
-    component: Profile,
-    fetchInitialData: (id) => util.getBusinessData(id),
-    //{<Link toDO: second initial data - is the user logged in or not}
-  },
-  {
-    //this page is reached if the service provider logs in from any access point
-    //initial data is the auth data AND the related business data
-    path: '/editProfile',
-    component: EditProfile,
-    fetchInitialData: (id) => util.getAuthData(id),
-    //{<Link toDO: second initial dtaa - related business data}
-  },
-  {
-    //this page renders if a user clicks the sign up link from any point
-    //MVP only service providers sign up
-    //later - users who sign up can post reviews and save business profiles
-    path: '/login',
-    component: Login
-  },
-  {
-    //this page renders if a user clicks the sign up link from any point
-    //MVP only service providers sign up
-    //later - users who sign up can post reviews and save business profiles
-    path: '/register',
-    component: Register
-  }
 
-];
 
 class App extends React.Component {
+  
+  constructor () {
+    super();
+
+    this.state = {
+      loggedIn: false,
+      results: []
+      
+    }
+  }
+
+  componentDidMount () {
+        
+    util.getUser().then(res => {
+      if (res.data) {
+        console.log("user is logged in")
+        this.setState( {
+          loggedIn: true
+        })
+      } else {
+        console.log("user is NOT logged in")
+        this.setState( {
+          loggedIn: false
+        })
+      }
+    })
+}
+
+shouldComponentUpdate(nextProps, nextState) {
+  console.log("testing right here")
+  console.log(nextState);
+  if(nextState.loggedIn) {
+    return true
+  }
+ }
+
  render() {
+ 
    return(
     <Router>
       <div>
@@ -83,17 +72,54 @@ class App extends React.Component {
           <Link className="navbar-brand" to="/"> Home </Link>
           <Link className="navbar-brand" to="/search"> Search </Link>
           <Link className="navbar-brand" to="/profile"> Profile </Link>
-          <Link className="navbar-brand" to="/register">Register</Link>
-          <Link className="navbar-brand" to="/login">Login</Link>
-          <Link className="navbar-brand" to="/editProfile">Edit Profile</Link>
+
+
+          {
+            this.state.loggedIn
+            ?
+            <div>
+              <Link className="navbar-brand" to="/logout">Logout</Link>
+              <Link className="navbar-brand" to="/editProfile">Edit Profile</Link>
+            </div>
+            :
+            <div>
+              <Link className="navbar-brand" to="/login">Login</Link>
+              <Link className="navbar-brand" to="/register">Register</Link>
+            </div>
+          }
         </nav> 
 
-        {routes.map(({path, component: C, fetchInitialData }) => (
+           <Route 
+            exact path='/'
+            render={(routeProps) =>
+              <Search {...routeProps}/>
+            }
+            /> 
           <Route 
-            exact path={path}
-            render={(props) => <C {...props} fetchInitialData={fetchInitialData} />}
+            exact path='/search'
+            render={(props) => <ResultsList {...props} fetchInitialData={(searchResults) => util.fetchSearchResults(searchResults)} />}
+            /> 
+          <Route 
+            exact path='/profile'
+            render={(props) => <Profile {...props} fetchInitialData={(id) => util.getBusinessData(id)} />}
+            /> 
+          <Route 
+            exact path={'/editProfile'}
+            render={(props) => <EditProfile {...props} fetchInitialData={(id) => util.getBusinessData(id)} />}
             />
-        ))}
+
+         <Route 
+            exact path={'/register'}
+            render={(props) => <Register {...props} />}
+            />
+          <Route 
+            exact path={'/login'}
+            render={(props) => <Login {...props} />}
+            />
+          <Route 
+            exact path={'/logout'}
+            render={(props) => <Logout {...props} />}
+            />
       </div>
       </Router>
 
