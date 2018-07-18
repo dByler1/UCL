@@ -8,9 +8,7 @@ import Register from './pages/Register';
 import EditProfile from './pages/EditProfile';
 import Login from './pages/Login';
 import Logout from './pages/Logout.js';
-//import Home from './pages/Home';
-//import Login from './pages/Login';
-//import NoMatch from './pages/NoMatch';
+
 
 //{<Link toDO: get these API calls set up}
 //{<Link toDO: expand business model <Link to accept additional input}
@@ -100,7 +98,7 @@ shouldComponentUpdate(nextProps, nextState) {
             render={(props) => <ResultsList {...props} fetchInitialData={(searchResults) => util.fetchSearchResults(searchResults)} />}
             /> 
           <Route 
-            exact path='/profile'
+            path='/profile'
             render={(props) => <Profile {...props} fetchInitialData={(id) => util.getBusinessData(id)} />}
             /> 
           <Route 

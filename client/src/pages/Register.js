@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import API from '../utils/api.js';
+import  {Link} from "react-router-dom";
 
 class Register extends Component {
 
@@ -28,7 +29,8 @@ class Register extends Component {
                 password: this.state.password
             })
             .then(res => {
-                this.props.history.push("/profile/?business=" + this.state.business_name)
+                
+                this.props.history.push("/profile/")
             })
             .catch(err => console.log(err));
         }
@@ -54,7 +56,11 @@ class Register extends Component {
                     <div className="form-group">
                         <input className="form-control" type='password' name="password" placeholder='Password' value={this.state.password} onChange={this.handleInputChange} />    
                     </div>
+
+                            
                     <button className="btn btn-default btn-primary" type='submit' onClick={this.handleFormSubmit}>Submit</button>
+                
+                
                 </form>
             </div>
         );

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import API from '../utils/api.js';
 import '../css/search.css'
+import  {Link} from "react-router-dom";
 
 class ResultsList extends Component {
     state = {
@@ -35,7 +36,11 @@ class ResultsList extends Component {
                 {
                     this.props.location.state && this.props.location.state.results ? 
                         this.props.location.state.results.map(user => 
-                        <a href="/profile">
+                        <Link to={{
+                            pathname: '/profile',
+                            state: {businessID: user._id}
+                            }} >
+                        
                             <div className="result">
                                 <img src="./img/ownerpic.jpeg" alt="owner profile"/>
                                 <div className="bizInfo">
@@ -44,7 +49,8 @@ class ResultsList extends Component {
                                     <span>{user.service_category}</span>
                                 </div>
                             </div>
-                        </a>
+                      
+                        </Link>
                         
                     ): <div> Go away! </div>
                 }

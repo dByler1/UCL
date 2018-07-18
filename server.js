@@ -95,8 +95,8 @@ app.get('/auth/logout', function (req, res) {
   res.json(true);
 });
 
-app.get("/getBusinessData/", function (req, res) {
-  Business.findOne()
+app.get("/getBusinessData/:businessID", function (req, res) {
+  Business.findById(req.params.businessID)
   .then(foundBusiness => res.json(foundBusiness));
 
 })
@@ -108,6 +108,23 @@ app.get("/getSearchResults/:searchTerm", function (req, res) {
   .then(foundBusiness => res.json(foundBusiness));
 
 })
+
+app.get('/auth/user', function (req, res) {
+  if (req.user) {
+      res.json({ user: req.user });
+  }
+  else {
+      res.json(false);
+  }
+});
+
+app.get('/auth/business', function (req, res) {
+  if (req.user) 
+  Business.find({users: { "$elemMatch": { "$eq":mongoose.Types.ObjectId(userId) } }})
+  else {
+      res.json(false);
+  }
+});
 
 
 

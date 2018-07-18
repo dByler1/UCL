@@ -5,7 +5,10 @@ import axios from "axios";
 export  default {
     // Gets all books
     getUser: function () {
-        return axios.get("/auth/check");
+        return axios.get("/auth/user");
+    },
+    getBusiness: function () {
+        return axios.get("/auth/business");
     },
     loginUser: function (loginData) {
         return axios.post("/auth/login/", loginData);
@@ -17,8 +20,8 @@ export  default {
     logoutUser: function () {
         return axios.get("/auth/logout/");
     },
-    getBusinessData: function() {
-        return axios.get("/getBusinessData")
+    getBusinessData: function(businessID) {
+        return axios.get("/getBusinessData/" + businessID)
     },
     getSearchResults: function (searchTerm) {
         console.log(searchTerm)
