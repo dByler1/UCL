@@ -32,8 +32,8 @@
         padding-top: 10px;
     }
     .jumbotron .jumbo-media img {
-        width: 4rem !important; 
-        height: 6rem !important;
+        width: 200px !important; 
+        height: 150px !important;
       } 
 
   }
@@ -44,7 +44,7 @@ body {
   
 
 .background-image {
-    background-image: url("../img/house-lowOpacity.png");
+    background-image: url("../img/house.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 
@@ -121,10 +121,11 @@ p, .btn, h1, figcaption, h5 {
     margin: 5px;
  }
  .jumbotron .jumbo-media img {
-    width: 6rem;
+    width: 250px;
     max-width: 100%; 
-    height: 8rem;
+    height: 100px;
     transition: 0.5s all ease; 
+    margin-right: 10px;
   }
 
 /* .jumbotron img {

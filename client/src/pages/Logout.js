@@ -22,7 +22,7 @@ class Login extends Component {
 
             API.logoutUser({
             }).then(res => {
-                console.log(res);
+                this.props.updateLoginStatus(false);
                 this.props.history.push("/");
                 // this.history.pushState(null, 'login');
             })

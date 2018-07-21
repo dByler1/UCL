@@ -8,6 +8,7 @@ import Register from './pages/Register';
 import EditProfile from './pages/EditProfile';
 import Login from './pages/Login';
 import Logout from './pages/Logout.js';
+import Navbar from './Components/Nav.js';
 
 
 //{<Link toDO: get these API calls set up}
@@ -34,58 +35,24 @@ class App extends React.Component {
     }
   }
 
-  componentDidMount () {
-        
-    util.getUser().then(res => {
-      if (res.data) {
-        console.log("user is logged in")
-        this.setState( {
-          loggedIn: true
-        })
-      } else {
-        console.log("user is NOT logged in")
-        this.setState( {
-          loggedIn: false
-        })
-      }
-    })
-}
 
-shouldComponentUpdate(nextProps, nextState) {
-  console.log("testing right here")
-  console.log(nextState);
-  if(nextState.loggedIn) {
-    return true
+  updateLoginStatus(r) {
+
+    
+    this.setState({
+      loggedIn: r
+    });
+    
+    console.log("IVE BEEN TRIGGERED!!")
   }
- }
 
  render() {
  
    return(
     <Router>
-      <div>
-     
-        <nav className="loginNav navbar navbar-expand-lg navbar-dark bg-primary">
+      <div> 
 
-          <Link className="navbar-brand" to="/"> Home </Link>
-          <Link className="navbar-brand" to="/search"> Search </Link>
-          <Link className="navbar-brand" to="/profile"> Profile </Link>
-
-
-          {
-            this.state.loggedIn
-            ?
-            <div>
-              <Link className="navbar-brand" to="/logout">Logout</Link>
-              <Link className="navbar-brand" to="/editProfile">Edit Profile</Link>
-            </div>
-            :
-            <div>
-              <Link className="navbar-brand" to="/login">Login</Link>
-              <Link className="navbar-brand" to="/register">Register</Link>
-            </div>
-          }
-        </nav> 
+          <Navbar loggedIn={this.state.loggedIn} />
 
            <Route 
             exact path='/'
@@ -99,7 +66,7 @@ shouldComponentUpdate(nextProps, nextState) {
             /> 
           <Route 
             path='/profile'
-            render={(props) => <Profile {...props} fetchInitialData={(id) => util.getBusinessData(id)} />}
+            render={(props) => <Profile {...props} fetchInitialData={() => util.getUserID()} />}
             /> 
           <Route 
             exact path={'/editProfile'}
@@ -108,15 +75,15 @@ shouldComponentUpdate(nextProps, nextState) {
 
          <Route 
             exact path={'/register'}
-            render={(props) => <Register {...props} />}
+            render={(props) => <Register updateLoginStatus={this.updateLoginStatus.bind(this)} {...props} />}
             />
           <Route 
             exact path={'/login'}
-            render={(props) => <Login {...props} />}
+            render={(props) => <Login updateLoginStatus={this.updateLoginStatus.bind(this)} {...props} />}
             />
           <Route 
             exact path={'/logout'}
-            render={(props) => <Logout {...props} />}
+            render={(props) => <Logout updateLoginStatus={this.updateLoginStatus.bind(this)} {...props} />}
             />
       </div>
       </Router>

@@ -29,7 +29,7 @@ class Register extends Component {
                 password: this.state.password
             })
             .then(res => {
-                
+                this.props.updateLoginStatus(res);
                 this.props.history.push("/profile/")
             })
             .catch(err => console.log(err));

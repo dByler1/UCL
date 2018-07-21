@@ -7,8 +7,16 @@ export  default {
     getUser: function () {
         return axios.get("/auth/user");
     },
-    getBusiness: function () {
-        return axios.get("/auth/business");
+    getUserID: function () {
+        return axios.get("/auth/userID");
+    },
+    getBusinessByUserID: function () {
+       
+        return axios.get("/auth/business/byUserID");
+    },
+    editBusinessProfile: function (updatedData) {
+        console.log("api edit business data: ", updatedData)
+        return axios.post("/business/editProfile",  updatedData);
     },
     loginUser: function (loginData) {
         return axios.post("/auth/login/", loginData);
@@ -24,7 +32,7 @@ export  default {
         return axios.get("/getBusinessData/" + businessID)
     },
     getSearchResults: function (searchTerm) {
-        console.log(searchTerm)
+        console.log("api get search results method: " + searchTerm)
         return axios.get("/getSearchResults/" + searchTerm)
     },
     fetchInitalData: function() {

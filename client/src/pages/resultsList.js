@@ -28,7 +28,7 @@ class ResultsList extends Component {
 
     render() {
         return (
-            <div className="main">
+            <div className="container">
             <div className="searchBox">
                 <input type="text" placeholder="Search.."/>
             </div>
@@ -42,11 +42,11 @@ class ResultsList extends Component {
                             }} >
                         
                             <div className="result">
-                                <img src="./img/ownerpic.jpeg" alt="owner profile"/>
+                                <img src={require('../img/GeneralListings.jpg')} alt="owner profile"/>
                                 <div className="bizInfo">
                                     <h3>{user.business_name}</h3>
-                                    {/* <span></span> */}
-                                    <span>{user.service_category}</span>
+                                    <span>{user.service_category} - Serving {user.service_counties} Counties</span>
+                                    <span>{user.value_prop}</span>
                                 </div>
                             </div>
                       

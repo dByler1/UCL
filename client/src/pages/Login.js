@@ -24,7 +24,9 @@ class Login extends Component {
                 username: this.state.username,
                 password: this.state.password
             }).then(res => {
-                console.log(res);
+                
+                this.props.updateLoginStatus(res);
+
                 this.props.history.push("/");
                 // this.history.pushState(null, 'login');
             })
@@ -33,6 +35,9 @@ class Login extends Component {
     };
 
     render() {
+
+        console.log("login props", this.props)
+
         return (
             <div className="container">
                 <h1>Login Page</h1>

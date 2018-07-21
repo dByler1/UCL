@@ -31,7 +31,7 @@ class Search extends Component {
         //do stuff with props here -- props are coming from APP.js
         return (
             
-                <div className="main">
+                <div className="container">
 
                     <div className="name">
                         <h1>General Listings</h1>
