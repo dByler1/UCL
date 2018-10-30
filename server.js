@@ -147,7 +147,7 @@ app.get("/getSearchResults/:searchTerm", function (req, res) {
 app.get('/auth/user', function (req, res) {
   if (req.user) {
       res.json({ user: req.user });
-      console.log('server auth user route: it working');
+      console.log('server auth user route: its working');
   }
   else {
       res.json(false);

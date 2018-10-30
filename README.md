@@ -1,84 +1,19 @@
-# Create React Express App
+# GENERAL LISTINGS APP
 
-## About This Boilerplate
+## About This Project
 
+This is a Node/Express/React app with a Mongo DB and Mongoose model
 This setup allows for a Node/Express/React app which can be easily deployed to Heroku.
 
-The front-end React app will auto-reload as it's updated via webpack dev server, and the backend Express app will auto-reload independently with nodemon.
+Authentication is achieved using the Passport package. 
 
-## Starting the app locally
+The navigation passes login and business data prior to page render for maximum speed. This can be found in client --> src --> app.js. 
 
-Start by installing front and backend dependencies. While in this directory, run the following commands:
+## App Story
 
-```
-yarn install
-cd client
-yarn install
-cd ..
-``
+This app connects homeservice professionals and homeowners. Homeservice professionals like plumbers and electricians can create an attractive and descriptive but straightforward profile. Homeowners can search for services, find professionals, review their capabilities, and contact them. 
 
-After both installations complete, run the following command in your terminal:
+This is not a lead gen app (Home Advisor, Angies List...etc). 
 
-```
-yarn start
-```
+An example of a functional, profitable profile can be found at [Universal Chimney Lining](https://www.universalchimneylining.com/).
 
-That's it, your app should be running on <http://localhost:3000>. The Express server should intercept any AJAX requests from the client.
-
-## Deployment (Heroku)
-
-### Create a Git Repo
-
-Once you're ready to deploy, start by making sure your project is a git repository. If so, proceed to the next section, otherwise run the following commands in your terminal:
-
-```
-git init
-git add .
-git commit -m "Initial commit"
-```
-
-### Heroku
-
-Make sure that you have a Heroku app created for this project. If so, proceed to the next section, otherwise run the following command in your terminal:
-
-```
-heroku create
-```
-
-Optionally add an argument for your application's name after `create`, e.g.
-
-```
-heroku myAwesomeApp
-```
-
-### Deploying
-
-#### Option 1
-
-Use the deploy script inside of the outer `package.json`
-
-After confirming that you have an up to date git repository and a Heroku app created, run the following command to deploy:
-
-```
-yarn deploy
-```
-
-If all previous steps were followed correctly, your application should be deployed to Heroku!
-
-#### Option 2
-
-Manually deploy 
-
-After confirming that you have an up to date git repository and a Heroku app created, complete the following:
-
-1. Build the React app for production by running the following command:
-
-```
-yarn build
-```
-
-2. Add and commit all changes to git
-
-3. Push to Heroku
-
-If all previous steps were followed correctly, your application should be deployed to Heroku!
